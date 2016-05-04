@@ -8,8 +8,8 @@ using SalesTracker.Models;
 namespace SalesTracker.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20160504165950_newInventoryModelTwo")]
-    partial class newInventoryModelTwo
+    [Migration("20160504172301_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

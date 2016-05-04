@@ -13,9 +13,9 @@ namespace SalesTracker.Models
         [Key]
         public int Id { get; set; }
 
-        string InventoryName { get; set; }
-        int InventoryPrice { get; set; }
-        int InventoryTotal { get; set; }
+        public string InventoryName { get; set; }
+        public int InventoryPrice { get; set; }
+        public int InventoryTotal { get; set; }
 
         public Inventory(string inventoryName, int inventoryPrice, int inventoryTotal, int id = 0)
         {
