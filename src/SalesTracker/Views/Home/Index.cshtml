@@ -33,7 +33,14 @@
 @foreach( var inventory in Model)
 {
     <p>@Html.DisplayFor(m => inventory.InventoryName)</p>
-    <li>@Html.DisplayFor(m => inventory.InventoryPrice)</li>
+    <li>@Html.DisplayFor(m => inventory.InventoryPrice)</li> 
+    <p></p>
+    
+    <form  id="sell">
+    <input type="number" name="inventoryId" value="@inventory.Id" />
+    <button class='btn btn-danger' type='submit' action="sale">sell</button>
+    </form>
+  
     <li>@Html.DisplayFor(m => inventory.InventoryTotal)</li>
     <hr />
 
@@ -53,9 +60,23 @@
             data: $(this).serialize(),
             success: function (result) {
             console.log(result.InventoryName)
-            }
-        });
-        console.log("done");
-        });
+                }
+           });
     });
+
+    $('#sell').submit(function (event) {
+        event.preventDefault();
+        console.log("working start")
+        $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            data: $(this).serialize(),
+            url: "Inventory/SellItem",
+            success: function (result) {
+                console.log(result)
+            }
+        })
+        console.log("end")
+     })
+   });
 </script>

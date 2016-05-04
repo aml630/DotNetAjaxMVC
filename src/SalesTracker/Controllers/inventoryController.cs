@@ -25,5 +25,16 @@ namespace SalesTracker.Controllers
             db.SaveChanges();
             return Json(newInventory);
         }
+
+        public IActionResult SellItem(int inventoryId)
+        {
+            Console.WriteLine(inventoryId);
+            //var intId = Int32.Parse(inventoryId);
+            var targetInventory = db.Inventories.FirstOrDefault(x => x.Id == inventoryId);
+           targetInventory.InventoryTotal = targetInventory.InventoryTotal - 1;
+            //db.Entry(changedInventory).State = Microsoft.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return Json(targetInventory);
+        }
     }
 }
