@@ -36,12 +36,12 @@
     <li>@Html.DisplayFor(m => inventory.InventoryPrice)</li> 
     <p></p>
     
-    <form  id="sell">
+    <form  class="sell">
     <input type="number" name="inventoryId" value="@inventory.Id" />
     <button class='btn btn-danger' type='submit' action="sale">sell</button>
     </form>
   
-    <li>@Html.DisplayFor(m => inventory.InventoryTotal)</li>
+    <li class="@inventory.Id">@Html.DisplayFor(m => inventory.InventoryTotal)</li>
     <hr />
 
 
@@ -64,7 +64,7 @@
            });
     });
 
-    $('#sell').submit(function (event) {
+    $('.sell').submit(function (event) {
         event.preventDefault();
         console.log("working start")
         $.ajax({
@@ -73,10 +73,12 @@
             data: $(this).serialize(),
             url: "Inventory/SellItem",
             success: function (result) {
-                console.log(result)
+                //console.log($(this).next(".totalReplace"))
+                
+                $('.'+result.Id).replaceWith("<li class=" +result.Id+">"+result.InventoryTotal+"</li>");
+
             }
         })
-        console.log("end")
      })
    });
 </script>
