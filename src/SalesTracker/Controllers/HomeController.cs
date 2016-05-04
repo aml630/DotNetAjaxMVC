@@ -13,6 +13,9 @@ namespace SalesTracker.Controllers
 
         public IActionResult Index()
         {
+
+            var store = db.Store.FirstOrDefault();
+            ViewBag.StoreRevenue = store.StoreRevenue;
             var InventoryModel = db.Inventories.ToList();
             return View(InventoryModel);
         }

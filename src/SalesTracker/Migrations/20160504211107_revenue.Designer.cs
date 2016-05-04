@@ -8,9 +8,10 @@ using SalesTracker.Models;
 namespace SalesTracker.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20160504211107_revenue")]
+    partial class revenue
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")
@@ -160,22 +161,6 @@ namespace SalesTracker.Migrations
                     b.HasKey("Id");
 
                     b.HasAnnotation("Relational:TableName", "Inventories");
-                });
-
-            modelBuilder.Entity("SalesTracker.Models.Sold", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("SoldName");
-
-                    b.Property<int>("SoldPrice");
-
-                    b.Property<int>("SoldTotal");
-
-                    b.HasKey("Id");
-
-                    b.HasAnnotation("Relational:TableName", "Solds");
                 });
 
             modelBuilder.Entity("SalesTracker.Models.Store", b =>

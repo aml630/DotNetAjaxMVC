@@ -7,6 +7,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
 <h1>Add Things To Your Store Inventory</h1>
+
+<h2>Store Revenue:   @ViewBag.StoreRevenue</h2>
+
 @*<form method="post" class="navbar-right new-inventory">
     <input type="text"  name="InventoryName" placeholder="Inventory Name"/>
     <input type="number"  name="InventoryTotal" placeholder="Number Of Items" />
@@ -37,7 +40,7 @@
     <p></p>
     
     <form  class="sell">
-    <input type="number" name="inventoryId" value="@inventory.Id" />
+    <input type="number" name="inventoryId" value="@inventory.Id" hidden/>
     <button class='btn btn-danger' type='submit' action="sale">sell</button>
     </form>
   
@@ -73,12 +76,11 @@
             data: $(this).serialize(),
             url: "Inventory/SellItem",
             success: function (result) {
-                //console.log($(this).next(".totalReplace"))
                 
                 $('.'+result.Id).replaceWith("<li class=" +result.Id+">"+result.InventoryTotal+"</li>");
 
             }
         })
-     })
+    })
    });
 </script>

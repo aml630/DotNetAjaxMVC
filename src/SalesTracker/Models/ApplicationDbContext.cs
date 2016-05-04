@@ -22,6 +22,10 @@ namespace SalesTracker.Models
             options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=aspnet5-SalesTracker-5301429d-b1cc-44ac-a599-d6660aebbf93;integrated security = True");
         }
         public virtual DbSet<Inventory> Inventories { get; set; }
+        public virtual DbSet<Sold> Solds { get; set; }
+
+        public virtual DbSet<Store> Store { get; set; }
+
 
     }
 }
