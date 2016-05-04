@@ -8,9 +8,10 @@ using SalesTracker.Models;
 namespace SalesTracker.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20160504155630_InventoryAddition")]
+    partial class InventoryAddition
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")
@@ -144,22 +145,6 @@ namespace SalesTracker.Migrations
                         .HasAnnotation("Relational:Name", "UserNameIndex");
 
                     b.HasAnnotation("Relational:TableName", "AspNetUsers");
-                });
-
-            modelBuilder.Entity("SalesTracker.Models.Inventory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("InventoryName");
-
-                    b.Property<int>("InventoryPrice");
-
-                    b.Property<int>("InventoryTotal");
-
-                    b.HasKey("Id");
-
-                    b.HasAnnotation("Relational:TableName", "Inventories");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>

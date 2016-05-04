@@ -1,4 +1,47 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
+@*<h1>Add Things To Your Store Inventory</h1>
+<form method="post" class="navbar-right new-inventory">
+    <input type="text"  name="InventoryName" placeholder="Inventory Name"/>
+    <input type="number"  name="InventoryAmount" placeholder="Number Of Items" />
+    <input type="number" name="InventoryPrice" placeholder="Cost Of Item" />
+    
+    <button type="submit" class="btn btn-success">Add To Inventory</button>
+</form>*@
+
+<br />
+<form action="AddItems" class="new-inventory">
+    <label for="InventoryName">inventory name</label>
+    <input type="text" name="InventoryName" />
+
+    <label for="InventoryPrice">inventory price</label>
+    <input type="number" name="InventoryPrice" />
+
+    <label for="InventoryTotal">inventory total</label>
+    <input type="number" name="InventoryTotal" />
+
+    <button type="submit">Submit</button>
+</form>
+
+<script type="text/javascript">
+    $(document).ready(function () { 
+    $('.new-inventory').submit(function (event) {
+        event.preventDefault();
+        console.log("start");
+        $.ajax({
+            url: "Inventory/addItems",
+            type: 'POST',
+            dataType: 'json',
+            data: $(this).serialize(),
+            success: function (result) {
+                console.log(result.InventoryName)
+                
+                }
+        });
+        console.log("done");
+        });
+    });
+</script>
