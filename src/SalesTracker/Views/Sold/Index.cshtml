@@ -1,0 +1,60 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+@model IEnumerable<SalesTracker.Models.Sold>
+
+
+<h1>List Your Solds</h1>
+
+
+
+@foreach (var sold in Model)
+{
+    <p>@sold.SoldName</p>
+    <p>@sold.SoldTotal</p>
+    @if (User.IsInRole("admin"))
+       {
+            <p>@sold.SoldCost</p>
+       }
+
+        @if (User.IsInRole("admin"))
+    {
+
+        <form class="comment">
+            <input type="text" name="statement" />
+            <input type="text" name="SoldId" value=@sold.Id hidden/>
+
+            <button type="submit" class="btn btn-success">Comment</button>
+        </form>
+        @*<div class="commentList"></div>*@
+            @foreach (var comment in sold.Comments)
+            {
+                <p>@Html.DisplayFor(x => comment.Statement)</p>
+            }
+    }
+
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.comment').submit(function (event) {
+            event.preventDefault();
+            console.log("start");
+            $.ajax({
+                url: "Sold/addComment",
+                type: 'POST',
+                dataType: 'json',
+                data: $(this).serialize(),
+                success: function (result) {
+                    console.log(result)
+                    console.log("comments" + result.Comments)
+
+                    //$(".commentList").append("<li>"+result.Statement+"</li>");
+                }
+            });
+        });
+    });
+
+ </script>

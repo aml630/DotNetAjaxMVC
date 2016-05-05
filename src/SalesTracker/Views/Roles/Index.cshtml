@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@using System.Security.Claims
+
+
+@if (User.IsInRole("admin"))
+{
+    <li>I'm an Admin!</li>
+}
+
+@if (User.IsSignedIn())
+{
+    <li>I'm Signed In!</li>
+}

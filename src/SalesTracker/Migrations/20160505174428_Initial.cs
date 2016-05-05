@@ -61,6 +61,32 @@ namespace SalesTracker.Migrations
                     table.PrimaryKey("PK_Inventory", x => x.Id);
                 });
             migrationBuilder.CreateTable(
+                name: "Solds",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    SoldCost = table.Column<int>(nullable: false),
+                    SoldName = table.Column<string>(nullable: true),
+                    SoldPrice = table.Column<int>(nullable: false),
+                    SoldTotal = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sold", x => x.Id);
+                });
+            migrationBuilder.CreateTable(
+                name: "Store",
+                columns: table => new
+                {
+                    StoreName = table.Column<string>(nullable: false),
+                    StoreRevenue = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Store", x => x.StoreName);
+                });
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -142,6 +168,25 @@ namespace SalesTracker.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+            migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    CommentId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    SoldId = table.Column<int>(nullable: false),
+                    Statement = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comment", x => x.CommentId);
+                    table.ForeignKey(
+                        name: "FK_Comment_Sold_SoldId",
+                        column: x => x.SoldId,
+                        principalTable: "Solds",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
@@ -162,9 +207,12 @@ namespace SalesTracker.Migrations
             migrationBuilder.DropTable("AspNetUserClaims");
             migrationBuilder.DropTable("AspNetUserLogins");
             migrationBuilder.DropTable("AspNetUserRoles");
+            migrationBuilder.DropTable("Comments");
             migrationBuilder.DropTable("Inventories");
+            migrationBuilder.DropTable("Store");
             migrationBuilder.DropTable("AspNetRoles");
             migrationBuilder.DropTable("AspNetUsers");
+            migrationBuilder.DropTable("Solds");
         }
     }
 }

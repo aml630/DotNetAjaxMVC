@@ -8,8 +8,8 @@ using SalesTracker.Models;
 namespace SalesTracker.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20160504213424_soldsModel")]
-    partial class soldsModel
+    [Migration("20160505174428_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -147,6 +147,20 @@ namespace SalesTracker.Migrations
                     b.HasAnnotation("Relational:TableName", "AspNetUsers");
                 });
 
+            modelBuilder.Entity("SalesTracker.Models.Comment", b =>
+                {
+                    b.Property<int>("CommentId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("SoldId");
+
+                    b.Property<string>("Statement");
+
+                    b.HasKey("CommentId");
+
+                    b.HasAnnotation("Relational:TableName", "Comments");
+                });
+
             modelBuilder.Entity("SalesTracker.Models.Inventory", b =>
                 {
                     b.Property<int>("Id")
@@ -167,6 +181,8 @@ namespace SalesTracker.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<int>("SoldCost");
 
                     b.Property<string>("SoldName");
 
@@ -218,6 +234,13 @@ namespace SalesTracker.Migrations
                     b.HasOne("SalesTracker.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("SalesTracker.Models.Comment", b =>
+                {
+                    b.HasOne("SalesTracker.Models.Sold")
+                        .WithMany()
+                        .HasForeignKey("SoldId");
                 });
         }
     }

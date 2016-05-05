@@ -18,6 +18,8 @@ namespace SalesTracker.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        //private readonly
+        private readonly ApplicationDbContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
@@ -25,19 +27,29 @@ namespace SalesTracker.Controllers
         private readonly ILogger _logger;
 
         public AccountController(
-            UserManager<ApplicationUser> userManager,
+
+        UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
             ISmsSender smsSender,
-            ILoggerFactory loggerFactory)
-        {
+            ILoggerFactory loggerFactory,
+            ApplicationDbContext db)
+        {   
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _smsSender = smsSender;
+            _db = db;
             _logger = loggerFactory.CreateLogger<AccountController>();
         }
 
+
+
+        public IActionResult Index()
+        {
+            var users = _db.Users.ToList();
+            return View(users);
+        }
         //
         // GET: /Account/Login
         [HttpGet]

@@ -39,7 +39,7 @@ namespace SalesTracker.Controllers
             var testSolds = db.Solds.FirstOrDefault(x => x.SoldName == targetInventory.InventoryName);
             if (testSolds == null){
                 //if null do regular sellItem function
-                Sold newSold = new Sold(targetInventory.InventoryName, targetInventory.InventoryPrice, 1);
+                Sold newSold = new Sold(targetInventory.InventoryName, targetInventory.InventoryPrice, 1, 1);
                 db.Solds.Add(newSold);
             }
             else

@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "About";
+}
+
+@model IEnumerable<SalesTracker.Models.ApplicationUser>
+
+@foreach(var user in Model)
+{
+    <p>@user.UserName</p>
+}

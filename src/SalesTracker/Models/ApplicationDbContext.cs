@@ -25,6 +25,8 @@ namespace SalesTracker.Models
         public virtual DbSet<Sold> Solds { get; set; }
 
         public virtual DbSet<Store> Store { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
+
 
 
     }
