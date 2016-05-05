@@ -36,6 +36,7 @@
 
     <button type="submit" class="btn btn-success">Add To Inventory</button>
 
+
 </form>
 
 @foreach( var inventory in Model)
@@ -44,11 +45,17 @@
     <li>@Html.DisplayFor(m => inventory.InventoryPrice)</li> 
     <p></p>
     
-    <form  class="sell">
+    <form class="sell">
     <input type="number" name="inventoryId" value="@inventory.Id" hidden/>
     <button class='btn btn-danger' type='submit' action="sale">sell</button>
     </form>
-  
+
+    <form class="return">
+    <input type="number" name="inventoryId" value="@inventory.Id" hidden />
+    <button type="submit" class="btn btn-success">Return</button>
+    </form>
+
+
     <li class="@inventory.Id">@Html.DisplayFor(m => inventory.InventoryTotal)</li>
     <hr />
 
@@ -86,6 +93,23 @@
 
             }
         })
+    })
+
+    $('.return').submit(function (event) {
+        event.preventDefault();
+        $.ajax({
+            type: 'GET',
+            DataType: 'json',
+            data: $(this).serialize(),
+            url: "Inventory/ReturnItem",
+            success: function (result) {
+                
+                $('.'+result.Id).replaceWith("<li class=" + result.Id + ">" + result.InventoryTotal + "</li>");
+
+            }
+
+        })
+
     })
    });
 </script>

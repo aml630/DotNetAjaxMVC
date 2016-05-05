@@ -55,6 +55,22 @@ namespace SalesTracker.Controllers
 
             return Json(targetInventory);
         }
+
+        public IActionResult ReturnItem(int inventoryId)
+        {
+
+            var store = db.Store.FirstOrDefault();
+            var targetInventory = db.Inventories.FirstOrDefault(x => x.Id == inventoryId);
+
+            targetInventory.InventoryTotal = targetInventory.InventoryTotal + 1;
+
+            store.StoreRevenue = store.StoreRevenue - targetInventory.InventoryPrice; 
+            db.SaveChanges();
+
+
+
+            return Json(targetInventory);
+        }
         
     }
 }
